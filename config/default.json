@@ -1,3 +1,4 @@
 {
-    "mongoURI" : "mongodb+srv://nika:n1i2k3a4@devconnector.vxwkbyq.mongodb.net/?retryWrites=true&w=majority"
+    "mongoURI" : "mongodb+srv://nika:n1i2k3a4@devconnector.vxwkbyq.mongodb.net/?retryWrites=true&w=majority",
+    "jwttoken": "asecrettoken"
 }
