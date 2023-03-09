@@ -156,4 +156,48 @@ router.delete('/', auth, async (req, res) => {
     res.status(500).send('Server error');
   }
 });
+
+// @route   Put api/profile
+// @desc    Update experience
+// @access  Public
+
+router.put(
+  '/experience',
+  [
+    auth,
+    [
+      body('title', 'title is required').notEmpty(),
+      body('company', 'company is required').notEmpty(),
+      body('location', 'location is required').notEmpty(),
+      body('from', 'from is required').notEmpty(),
+      body('current', 'Current is required').notEmpty(),
+    ],
+  ],
+  async (req, res) => {
+    const { title, company, location, from, to, current, description } =
+      req.body;
+    const newExp = {
+      title,
+      company,
+      location,
+      from,
+      to,
+      current,
+      description,
+    };
+
+    try {
+      const profile = await Profile.findOne({ user: req.user.id });
+
+      // unshift pushes at front rather than at end
+      profile.experience.unshift(newExp);
+
+      await profile.save();
+      res.json(profile);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server error');
+    }
+  }
+);
 module.exports = router;
