@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const Landing = () => {
   return (
     <section className='landing'>
@@ -9,12 +11,12 @@ const Landing = () => {
             other developers
           </p>
           <div>
-            <a className='btn btn-primary' href='register.html'>
+            <Link className='btn btn-primary' to='/register'>
               Sign Up
-            </a>
-            <a className='btn' href='login.html'>
+            </Link>
+            <Link className='btn' to='/login'>
               Login
-            </a>
+            </Link>
           </div>
         </div>
       </div>
