@@ -27,7 +27,7 @@ const Register = ({ setAlert }) => {
 
   return (
     <>
-      <section className='container'>
+      <section>
         <h1 className='large text-primary'>Sign Up</h1>
         <p className='lead'>
           <i className='fas fa-user'></i>
