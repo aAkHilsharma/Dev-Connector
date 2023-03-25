@@ -16,8 +16,7 @@ const Login = () => {
   };
   return (
     <>
-      <section>
-        <div className='alert alert-danger'>Invalid Credentials</div>
+      <section className='container'>
         <h1 className='large text-primary'>Sign In</h1>
         <p className='lead'>
           <i className='fas fa-user'></i>
