@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
 import PropTypes from 'prop-types';
 import Alert from '../layout/Alert';
-import register from '../../actions/auth';
+import { register } from '../../actions/auth';
 
 const Register = ({ setAlert, register }) => {
   const [formData, setFormData] = useState({

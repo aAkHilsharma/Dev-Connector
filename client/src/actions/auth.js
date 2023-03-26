@@ -5,6 +5,8 @@ import {
   REGISTER_FAIL,
   USER_LOADED,
   AUTH_ERROR,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
 } from './types';
 import setAuthToken from '../utils/setAuthToken';
 
@@ -15,7 +17,8 @@ export const loaduser = () => async (dispatch) => {
   }
 
   try {
-    const res = axios.get('/api/auth');
+    const res = await axios.get('/api/auth');
+
     dispatch({
       type: USER_LOADED,
       payload: res.data,
@@ -28,13 +31,14 @@ export const loaduser = () => async (dispatch) => {
 };
 
 // Register user
-const register = (formData) => async (dispatch) => {
+export const register = (formData) => async (dispatch) => {
   try {
     const res = await axios.post('/api/users', formData);
     dispatch({
       type: REGISTER_SUCCESS,
       payload: res.data,
     });
+    dispatch(loaduser());
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -46,4 +50,24 @@ const register = (formData) => async (dispatch) => {
   }
 };
 
-export default register;
+// Login user
+export const login = (formData) => async (dispatch) => {
+  try {
+    const res = await axios.post('/api/auth', formData);
+    dispatch({
+      type: LOGIN_SUCCESS,
+      payload: res.data,
+    });
+    dispatch(loaduser());
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+    }
+
+    dispatch({
+      type: LOGIN_FAIL,
+    });
+  }
+};
