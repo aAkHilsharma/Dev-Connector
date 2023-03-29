@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { createProfile } from '../../actions/profile';
+import { useNavigate } from 'react-router-dom';
 
-const CreateProfile = () => {
+const CreateProfile = ({ createProfile, profile: { profile } }) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     company: '',
     website: '',
@@ -37,6 +41,15 @@ const CreateProfile = () => {
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+  const onSubmit = (e) => {
+    const editing = profile ? true : false;
+    e.preventDefault();
+    createProfile(formData).then(() => {
+      if (!editing) {
+        navigate('/dashboard');
+      }
+    });
+  };
   return (
     <section className='container'>
       <h1 className='large text-primary'>Create Your Profile</h1>
@@ -45,9 +58,9 @@ const CreateProfile = () => {
         profile stand out
       </p>
       <small>* = required fields</small>
-      <form className='form'>
+      <form className='form' onSubmit={onSubmit}>
         <div className='form-group'>
-          <select name='status'>
+          <select name='status' value={status} onChange={onChange}>
             <option value='0'>* Select Professional Status</option>
             <option value='Developer'>Developer</option>
             <option value='Junior Developer'>Junior Developer</option>
@@ -211,6 +224,12 @@ const CreateProfile = () => {
   );
 };
 
-CreateProfile.propTypes = {};
+CreateProfile.propTypes = {
+  createProfile: PropTypes.func.isRequired,
+};
 
-export default CreateProfile;
+const mapStateToProps = (state) => ({
+  profile: state.profile,
+});
+
+export default connect(mapStateToProps, { createProfile })(CreateProfile);
