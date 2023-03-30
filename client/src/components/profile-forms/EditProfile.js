@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { createProfile } from '../../actions/profile';
 import { useNavigate } from 'react-router-dom';
 import { getCurrentUserProfile } from '../../actions/profile';
+import { Link } from 'react-router-dom';
 
 const initialState = {
   company: '',
@@ -243,9 +244,9 @@ const EditProfile = ({
         )}
 
         <input type='submit' className='btn btn-primary my-1' />
-        <a className='btn btn-light my-1' href='dashboard.html'>
+        <Link className='btn btn-light my-1' to='/dashboard'>
           Go Back
-        </a>
+        </Link>
       </form>
     </section>
   );
