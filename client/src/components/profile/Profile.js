@@ -5,6 +5,7 @@ import Spinner from '../layout/Spinner';
 import { getProfileById } from '../../actions/profile';
 import { Link, useParams } from 'react-router-dom';
 import ProfileTop from './ProfileTop';
+import ProfileAbout from './ProfileAbout';
 
 const Profile = ({ getProfileById, profile: { loading, profile }, auth }) => {
   const { id } = useParams();
@@ -18,7 +19,7 @@ const Profile = ({ getProfileById, profile: { loading, profile }, auth }) => {
         <Spinner />
       ) : (
         <>
-          <Link to='/profiles' className='btn btn-light'>
+          <Link to='/profiles' className='btn btn-light my-1'>
             Back To Profiles
           </Link>
           {auth.isAuthenticated &&
@@ -30,6 +31,7 @@ const Profile = ({ getProfileById, profile: { loading, profile }, auth }) => {
             )}
           <div className='profile-grid'>
             <ProfileTop profile={profile} />
+            <ProfileAbout profile={profile} />
           </div>
         </>
       )}
