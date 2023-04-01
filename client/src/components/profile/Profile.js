@@ -8,6 +8,7 @@ import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
 import ProfileExperience from './ProfileExperience.js';
 import ProfileEducation from './ProfileEducation.js';
+import ProfileGithub from './ProfileGithub';
 
 const Profile = ({ getProfileById, profile: { loading, profile }, auth }) => {
   const { id } = useParams();
@@ -58,6 +59,9 @@ const Profile = ({ getProfileById, profile: { loading, profile }, auth }) => {
                 <h4>No Education Credentials</h4>
               )}
             </div>
+            {profile.githubusername && (
+              <ProfileGithub username={profile.githubusername} />
+            )}
           </div>
         </>
       )}
