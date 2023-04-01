@@ -1,19 +1,17 @@
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useState } from 'react';
 import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
 import PropTypes from 'prop-types';
-import Alert from '../layout/Alert';
 import { register } from '../../actions/auth';
 
-const Register = ({ setAlert, register }) => {
+const Register = ({ setAlert, register, auth: { isAuthenticated } }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
     cpassword: '',
   });
-
   const { name, email, password, cpassword } = formData;
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -27,10 +25,13 @@ const Register = ({ setAlert, register }) => {
     }
   };
 
+  if (isAuthenticated) {
+    return <Navigate replace to='/dashboard' />;
+  }
+
   return (
     <>
       <section className='container'>
-        <Alert />
         <h1 className='large text-primary'>Sign Up</h1>
         <p className='lead'>
           <i className='fas fa-user'></i>
@@ -94,6 +95,11 @@ const Register = ({ setAlert, register }) => {
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
 };
 
-export default connect(null, { setAlert, register })(Register);
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, { setAlert, register })(Register);
