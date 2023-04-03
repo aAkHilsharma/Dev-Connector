@@ -10,6 +10,7 @@ import Spinner from '../layout/Spinner';
 
 const Dashboard = ({
   getCurrentUserProfile,
+  deleteAccount,
   auth: { user },
   profile: { profile, loading },
 }) => {
