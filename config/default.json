@@ -1,5 +1,5 @@
 {
-    "mongoURI" : "mongodb+srv://nika:n1i2k3a4@devconnector.vxwkbyq.mongodb.net/?retryWrites=true&w=majority",
+    "mongoURI" : "mongodb+srv://akhil:a1k2h3i4l5@cluster1.jrhe9rm.mongodb.net/devDB",
     "jwttoken": "asecrettoken",
     "githubClientId": "a409fb52329cf082ed0c",
     "githubSecret": "18c296a061ae1a9a7f973cf2214f0db81884c5c6"
